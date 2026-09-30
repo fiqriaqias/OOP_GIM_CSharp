@@ -13,13 +13,26 @@ namespace KerangkaGame
         //enskapsulasi
         public string nama { get; private set; }
         public int kesehatan { get; private set; }
-        public string senjata { get; private set; }
+        public int senjata { get; private set; }
 
-        public Karakter(string nama, int kesehatan, string senjata) //Membuat constructor
+        public Karakter(string nama, int kesehatan, int senjata) //Membuat constructor
         {
             this.nama = nama;
             this.kesehatan = kesehatan;
             this.senjata = senjata;
+        }
+
+        public void Serang(Karakter target)
+        {
+            Console.WriteLine("==> Mulai Serangan");
+            target.TerimaSerangan(this.senjata);
+        }
+
+        public void TerimaSerangan(int jumlahSerangan)
+        {
+            kesehatan -= jumlahSerangan;
+            Console.WriteLine($"{nama}, Diserang dengan {jumlahSerangan}," +
+                $" Sisa kesehatan {kesehatan}");
         }
         //public void setData(string nama, string kesehatan, string senjata, int totalSenjata, int kekuatan)
         //{
@@ -48,11 +61,19 @@ namespace KerangkaGame
         {
             static void Main(string[] args)
             {
-                Karakter player1 = new Karakter("Fiqri", 100, "Doa"); //membuat objek
+                Karakter player1 = new Karakter("Fiqri", 100, 50); //membuat objek
+                
+                Karakter musuh = new Karakter("Iblis", 99, 51);
+
+                //interaksi
+                player1.Serang(musuh);
+
+                player1.getData();
+
+
                 //player1.nama = ("Fiqri Aqias");
                 //player1.kesehatan = ("Sehat");
                 //player1.senjata = ("Demon Sword");
-                player1.getData();
                 //List<Karakter> daftarMC = new List<Karakter>(); //array penyimpan data
 
                 //Karakter player1 = new Karakter();
